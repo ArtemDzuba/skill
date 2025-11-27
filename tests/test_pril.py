@@ -39,7 +39,6 @@ def test_create_parking(client):
 def test_enter_parking(client, db_session):
     client_id = 2
     parking_id = 2
-    # response = client.post("/client_parkings", data={"client_id": client_id, "parking_id": parking_id})
     response = client.post(
         f"/client_parkings?client_id={client_id}&parking_id={parking_id}"
     )
