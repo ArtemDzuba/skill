@@ -36,12 +36,12 @@ jobs:
 
       # black --diff --check src/
       - name: Run black check
-        run: black --diff --check src/
+        run: black --diff --check .
 
       # isort --check-only src/
       - name: Run isort check
-        run: isort --check-only src/
+        run: isort --check-only .
 
       # flake8 src/
       - name: Run flake8
-        run: flake8 src/
+        run: flake8 .
