@@ -75,7 +75,7 @@ def create_app():
         parking_id = request.args.get('parking_id', type=int)
 
 
-        client = db.session.get(Client, client_id)
+        # client = db.session.get(Client, client_id)
         parking = db.session.get(Parking, parking_id)
 
         if not parking.opened:
