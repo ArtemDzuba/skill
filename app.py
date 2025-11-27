@@ -75,7 +75,10 @@ def create_app():
         parking_id = request.args.get('parking_id', type=int)
 
 
-        # client = db.session.get(Client, client_id)
+        client = db.session.get(Client, client_id)
+        if client is None:
+            return jsonify({"error": "Client not found"}), 404
+    
         parking = db.session.get(Parking, parking_id)
 
         if not parking.opened:
@@ -87,8 +90,8 @@ def create_app():
         active_parking = ClientParking.query.filter_by(client_id=client_id, parking_id=parking_id,
                                                        time_out=None).first()
 
-        # if active_parking:
-        #     return jsonify({"error": "Client already parked here"}), 400
+        if active_parking:
+            return jsonify({"error": "Client already parked here"}), 400
 
 
         parking.count_available_places -= 1
