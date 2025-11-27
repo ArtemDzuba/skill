@@ -1,7 +1,7 @@
 import json
 import pytest
 
-from .models import Parking
+from ..models import Parking
 
 
 @pytest.mark.parametrize("route", [

@@ -1,6 +1,6 @@
 import factory
 from .app import db
-from module_29_testing.hw.models import Client, Parking
+from .models import Client, Parking
 
 class ClientFactory(factory.alchemy.SQLAlchemyModelFactory):
     class Meta:

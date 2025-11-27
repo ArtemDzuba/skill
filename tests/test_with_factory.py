@@ -1,6 +1,6 @@
 import pytest
-from .factories import ClientFactory, ParkingFactory
-from .models import Client, Parking
+from ..factories import ClientFactory, ParkingFactory
+from ..models import Client, Parking
 
 @pytest.mark.parking
 def test_create_client(db_session):
