@@ -1,7 +1,10 @@
-import pytest
 from datetime import datetime, timedelta
-from .app import create_app, db as _db
-from .models import Client, Parking, ClientParking
+
+import pytest
+
+from .app import create_app
+from .app import db as _db
+from .models import Client, ClientParking, Parking
 
 
 @pytest.fixture

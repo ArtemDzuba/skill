@@ -14,7 +14,7 @@ def create_app():
 
     db.init_app(app)
 
-    from .models import Client, Parking, ClientParking
+    from .models import Client, ClientParking, Parking
 
     with app.app_context():
         db.create_all()  # создать таблицы при старте

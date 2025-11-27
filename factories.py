@@ -1,4 +1,5 @@
 import factory
+
 from .app import db
 from .models import Client, Parking
 
