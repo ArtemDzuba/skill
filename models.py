@@ -1,7 +1,7 @@
 from typing import Dict, Any
 from .app import db
 
-BaseModel = Any
+db: Any
 
 class Client(db.Model):
     __tablename__ = "client"
