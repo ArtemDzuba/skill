@@ -1,6 +1,7 @@
 from typing import Dict, Any
 from .app import db
 
+
 class Client(db.Model):
     __tablename__ = "client"
 
@@ -12,6 +13,7 @@ class Client(db.Model):
 
     def to_json(self) -> Dict[str, Any]:
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
 
 class Parking(db.Model):
     __tablename__ = "parking"
@@ -25,18 +27,19 @@ class Parking(db.Model):
     def to_json(self) -> Dict[str, Any]:
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
+
 class ClientParking(db.Model):
     __tablename__ = "client_parking"
 
     id = db.Column(db.Integer, primary_key=True)
-    client_id = db.Column(db.Integer, db.ForeignKey('client.id'))
-    parking_id = db.Column(db.Integer, db.ForeignKey('parking.id'))
+    client_id = db.Column(db.Integer, db.ForeignKey("client.id"))
+    parking_id = db.Column(db.Integer, db.ForeignKey("parking.id"))
     time_in = db.Column(db.DateTime)
     time_out = db.Column(db.DateTime)
 
     __table_args__ = (
-        db.UniqueConstraint('client_id', 'parking_id', name='unique_client_parking'),
+        db.UniqueConstraint("client_id", "parking_id", name="unique_client_parking"),
     )
 
-    client = db.relationship('Client', backref='parkings')
-    parking = db.relationship('Parking', backref='clients')
+    client = db.relationship("Client", backref="parkings")
+    parking = db.relationship("Parking", backref="clients")

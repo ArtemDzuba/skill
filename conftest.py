@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 from .app import create_app, db as _db
 from .models import Client, Parking, ClientParking
 
+
 @pytest.fixture
 def app():
     _app = create_app()
@@ -17,21 +18,21 @@ def app():
             name="John",
             surname="Doe",
             credit_card="1234-5678-9876-5432",
-            car_number="ABC-123"
+            car_number="ABC-123",
         )
         parking = Parking(
             id=1,
             address="123 Main St",
             opened=True,
             count_places=10,
-            count_available_places=10
+            count_available_places=10,
         )
         client_parking = ClientParking(
             id=1,
             client_id=1,
             parking_id=1,
             time_in=datetime.now() - timedelta(hours=1),
-            time_out=None
+            time_out=None,
         )
 
         _db.session.add_all([client, parking, client_parking])
@@ -42,14 +43,14 @@ def app():
             name="Depts",
             surname="Doe",
             credit_card="2345-5678-9876-5432",
-            car_number="ABC-126"
+            car_number="ABC-126",
         )
         parking2 = Parking(
             id=2,
             address="124 Main St",
             opened=True,
             count_places=10,
-            count_available_places=10
+            count_available_places=10,
         )
         _db.session.add_all([client2, parking2])
         _db.session.commit()
@@ -60,9 +61,11 @@ def app():
         _db.session.remove()
         _db.drop_all()
 
+
 @pytest.fixture
 def client(app):
     return app.test_client()
+
 
 @pytest.fixture
 def db_session(app):
