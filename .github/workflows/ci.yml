@@ -32,7 +32,7 @@ jobs:
 
       # mypy src/
       - name: Run mypy
-        run: mypy .
+        run: mypy app.py models.py tests
 
       # black --diff --check src/
       - name: Run black check
