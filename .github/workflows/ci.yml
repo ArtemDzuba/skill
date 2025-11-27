@@ -32,7 +32,7 @@ jobs:
 
       # mypy src/
       - name: Run mypy
-        run: mypy src/
+        run: mypy .
 
       # black --diff --check src/
       - name: Run black check
