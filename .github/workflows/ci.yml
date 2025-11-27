@@ -9,7 +9,7 @@ on:
       - '**'
 
 jobs:
-  lint:
+  tests-and-linters:
     runs-on: ubuntu-latest
 
     steps:
@@ -25,32 +25,23 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-          pip install ruff
 
-      - name: Run ruff lint
-        run: ruff check .
+      # unittest → pytest tests
+      - name: Run pytest
+        run: pytest tests
 
-      - name: Run ruff format check
-        run: ruff format --check .
+      # mypy src/
+      - name: Run mypy
+        run: mypy src/
 
-  test:
-    runs-on: ubuntu-latest
-    needs: lint
+      # black --diff --check src/
+      - name: Run black check
+        run: black --diff --check src/
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      # isort --check-only src/
+      - name: Run isort check
+        run: isort --check-only src/
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-          pip install pytest pytest-cov httpx
-
-      - name: Run tests
-        run: pytest tests -v --cov=tests --cov-report=xml
+      # flake8 src/
+      - name: Run flake8
+        run: flake8 src/
